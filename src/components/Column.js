@@ -1,7 +1,7 @@
 // src/components/Column.js
 import React, { useState } from "react";
 import Task from "./Task";
-import "../Column.css";
+import "../style/Column.css";
 
 const Column = ({ title, tasks, onAddTask, onEditTask, onDeleteTask, onMoveTask }) => {
   const [isAddingTask, setIsAddingTask] = useState(false);

@@ -1,7 +1,7 @@
 // src/components/Board.js
 import React from "react";
 import Column from "./Column";
-import "../Board.css";
+import "../style/Board.css";
 
 const Board = ({ tasks, onAddTask, onEditTask, onDeleteTask, onMoveTask }) => {
   const columns = ["To Do", "In Progress", "Done"];

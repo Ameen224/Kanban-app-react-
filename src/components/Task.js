@@ -1,6 +1,6 @@
 // src/components/Task.js
 import React, { useState } from "react";
-import "../Task.css";
+import "../style/Task.css";
 
 const Task = ({ task, onEdit, onDelete, onMove }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -71,7 +71,7 @@ const Task = ({ task, onEdit, onDelete, onMove }) => {
       draggable="true"
       onDragStart={handleDragStart}
     >
-      <div className="task-drag-handle">⋮⋮</div>
+      <div className="task-drag-handle"></div>
       <div className="task-content">
         <h4>{task.title}</h4>
         {task.description && <p>{task.description}</p>}

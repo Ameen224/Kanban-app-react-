@@ -1,13 +1,18 @@
 // src/Pages/Kanbanpage.js
-
 import React from 'react';
 import Board from '../components/Board';
 
-function KanbanPage() {
+function KanbanPage({ tasks, onAddTask, onEditTask, onDeleteTask, onMoveTask }) {
   return (
     <div>
-      <h1>Kanban Board</h1>
-      <Board />
+      <h1 style={{ textAlign: "center", marginTop: "1rem" }}>Kanban Board</h1>
+      <Board 
+        tasks={tasks}
+        onAddTask={onAddTask}
+        onEditTask={onEditTask}
+        onDeleteTask={onDeleteTask}
+        onMoveTask={onMoveTask}
+      />
     </div>
   );
 }

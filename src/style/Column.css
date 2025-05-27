@@ -1,4 +1,4 @@
-/* Add this to your Column.css */
+/*  Column.css */
 .column {
   background-color: #f0f0f0;
   padding: 1rem;
@@ -10,8 +10,8 @@
 
 .column.drag-over {
   background-color: #e3f2fd;
-  border: 2px dashed #2196f3;
-  transform: scale(1.02);
+  /* border: 2px dashed #2196f3; */
+  /* transform: scale(1.02); */
 }
 
 .column-header {
@@ -50,7 +50,7 @@
   text-align: center;
   padding: 2rem 1rem;
   background-color: #e8f5e8;
-  border: 2px dashed #28a745;
+  /* border: 2px dashed #28a745; */
   border-radius: 8px;
   color: #28a745;
   font-weight: bold;
