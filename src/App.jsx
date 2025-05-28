@@ -6,14 +6,23 @@ import KanbanPage from "./Pages/Kanbanpage";
 import "./style/App.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(()=>{
+    return localStorage.getItem("kanbanloggedIn")==="true"
+  });
   const [isSignup, setIsSignup] = useState(false);
   const [tasks, setTasks] = useState(() => {
     const saved = localStorage.getItem("kanbanTasks");
     return saved ? JSON.parse(saved) : [];
   });
 
-  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogin = () => {setIsLoggedIn(true);
+    localStorage.setItem("kanbanloggedIn","true")
+  }
+
+ const handleLogout = () => {
+  setIsLoggedIn(false);
+  localStorage.removeItem("kanbanLoggedIn");
+};
 
   const handleAddTask = (newTask) => {
     const updatedTasks = [...tasks, { ...newTask, id: Date.now() }];
@@ -58,6 +67,8 @@ function App() {
           onEditTask={handleEditTask}
           onDeleteTask={handleDeleteTask}
           onMoveTask={handleMoveTask}
+          onLogout={handleLogout} 
+
         />
       )}
     </div>
