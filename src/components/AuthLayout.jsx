@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { isAuthenticated } from '../utils/auth';
+import { isAuthenticated } from '../utils/auth.js';
 
 const AuthLayout = () => {
   return isAuthenticated() ? <Outlet /> : <Navigate to="/login" />;

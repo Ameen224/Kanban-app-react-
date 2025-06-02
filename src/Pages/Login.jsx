@@ -1,31 +1,49 @@
-// src/Pages/Login.js
+// src/pages/Login.jsx
+// ========================================
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../utils/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginUser({ email });
-    navigate('/');
+    setLoading(true);
+    
+    try {
+      await loginUser({ email });
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2>Login to Kanban Board</h2>
       <form onSubmit={handleSubmit}>
         <input 
           type="email" 
-          placeholder="Email" 
+          placeholder="Enter your email" 
           value={email}
           onChange={(e) => setEmail(e.target.value)} 
           required 
+          disabled={loading}
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
       </form>
+      
+      <div className="auth-footer">
+        <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+      </div>
     </div>
   );
 };
