@@ -1,62 +1,33 @@
 // src/Pages/Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../utils/auth';
 
-function Login({ onLogin, onSwitchToSignup }) {
+const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Get user data from localStorage
-    const savedUser = localStorage.getItem('kanbanUser');
-    
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      
-      // Check if email and password match
-      if (user.email === email && user.password === password) {
-        setError('');
-        onLogin(); // Call the function to switch to kanban page
-      } else {
-        setError('Wrong email or password!');
-      }
-    } else {
-      setError('No user found. Please sign up first.');
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser({ email });
+    navigate('/');
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-form">
-        <h2>Login</h2>
-        
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
         <input 
-          type="email"
-          placeholder="Enter your email" 
-          value={email} 
+          type="email" 
+          placeholder="Email" 
+          value={email}
           onChange={(e) => setEmail(e.target.value)} 
+          required 
         />
-        
-        <input 
-          type="password"
-          placeholder="Enter your password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-        
-        {error && <div className="error-message">{error}</div>}
-        
-        <button onClick={handleLogin}>Login</button>
-        
-        <p>
-          Don't have an account? 
-          <button className="link-btn" onClick={onSwitchToSignup}>
-            Sign up here
-          </button>
-        </p>
-      </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;

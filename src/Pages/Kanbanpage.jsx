@@ -1,22 +1,23 @@
 // src/Pages/Kanbanpage.js
 import React from 'react';
 import Board from '../components/Board';
+import { logoutUser } from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
-function KanbanPage({ tasks, onAddTask, onEditTask, onDeleteTask, onMoveTask,onLogout }) {
+const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/login');
+  };
+
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginTop: "1rem" }}>Kanban Board</h1>
-       <button onClick={onLogout}>click here to logout</button>
-      <Board 
-        tasks={tasks}
-        onAddTask={onAddTask}
-        onEditTask={onEditTask}
-        onDeleteTask={onDeleteTask}
-        onMoveTask={onMoveTask}
-
-      />
+      <button onClick={handleLogout} className="logout-btn">Logout</button>
+      <Board />
     </div>
   );
-}
+};
 
-export default KanbanPage;
+export default Dashboard;

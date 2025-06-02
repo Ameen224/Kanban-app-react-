@@ -1,6 +1,13 @@
-/* src/index.js*/
-import ReactDOM from 'react-dom/client';
-import App from './App';
+//  src/index.jsx
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './styles/app.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
