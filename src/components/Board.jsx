@@ -1,41 +1,48 @@
 // src/components/Board.jsx
-
 import React, { useState } from 'react';
 import Column from './Column';
 
 const initialData = {
-  todo: [
-    { id: 1, title: 'Create task system', description: 'Build a complete kanban board' },
-    { id: 2, title: 'Setup authentication', description: 'Implement login and signup' }
-  ],
-  inProgress: [
-    { id: 3, title: 'Design UI components', description: 'Create beautiful task cards' }
-  ],
-  done: [
-    { id: 4, title: 'Project setup', description: 'Initialize React project with routing' }
-  ],
+  todo: [],
+  inProgress: [],
+  done: [],
 };
 
 const Board = () => {
   const [columns, setColumns] = useState(initialData);
-  const [nextId, setNextId] = useState(5);
+  const [nextId, setNextId] = useState(1);
 
-  const moveTask = (from, to, taskId) => {
-    const task = columns[from].find(t => t.id === taskId);
-    if (task) {
-      setColumns(prev => ({
-        ...prev,
-        [from]: prev[from].filter(t => t.id !== taskId),
-        [to]: [...prev[to], task]
-      }));
-    }
+  const moveTask = (taskId, targetColumnId) => {
+    setColumns(prevColumns => {
+      let sourceColumnId = null;
+      let taskToMove = null;
+      
+      for (const [columnId, tasks] of Object.entries(prevColumns)) {
+        const task = tasks.find(t => t.id === taskId);
+        if (task) {
+          sourceColumnId = columnId;
+          taskToMove = task;
+          break;
+        }
+      }
+      
+      if (!taskToMove || sourceColumnId === targetColumnId) {
+        return prevColumns;
+      }
+      
+      return {
+        ...prevColumns,
+        [sourceColumnId]: prevColumns[sourceColumnId].filter(t => t.id !== taskId),
+        [targetColumnId]: [...prevColumns[targetColumnId], taskToMove]
+      };
+    });
   };
 
   const addTask = (columnKey, taskData) => {
     const newTask = {
       id: nextId,
-      title: taskData.title,
-      description: taskData.description
+      ...taskData,
+      createdAt: new Date().toISOString()
     };
     
     setColumns(prev => ({

@@ -1,24 +1,31 @@
 // src/pages/Login.jsx
-// ========================================
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginUser } from '../utils/auth';
+import { loginUser, isUserRegistered } from '../utils/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     
     try {
-      await loginUser({ email });
+      if (!isUserRegistered(email)) {
+        setError('User not found. Please sign up first.');
+        navigate('/signup');
+        return;
+      }
+      
+      loginUser({ email });
       navigate('/');
     } catch (error) {
-      console.error('Login failed:', error);
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -40,6 +47,8 @@ const Login = () => {
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
+      
+      {error && <div className="error-message">{error}</div>}
       
       <div className="auth-footer">
         <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>

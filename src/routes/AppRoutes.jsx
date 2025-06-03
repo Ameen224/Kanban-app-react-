@@ -6,12 +6,15 @@ import Login from '../Pages/Login';
 import Signup from '../Pages/Signup';
 import Dashboard from '../Pages/Kanbanpage';
 import AuthLayout from '../components/AuthLayout';
+import GuestLayout from '../components/GuestLayout';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route element={<GuestLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Route>
       <Route element={<AuthLayout />}>
         <Route path="/" element={<Dashboard />} />
       </Route>
