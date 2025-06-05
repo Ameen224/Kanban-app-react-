@@ -12,7 +12,7 @@ const GuestLayout = () => {
       setShowMessage(true);
       const timer = setTimeout(() => {
         setShowMessage(false);
-        navigate('/', { replace: true }); // Redirect after delay
+        navigate('/', { replace: true }); 
       }, 3000);
 
       return () => clearTimeout(timer);
