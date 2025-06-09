@@ -1,29 +1,27 @@
 // src/utils/auth.js
 
-export const isAuthenticated = () => {
-  return !!localStorage.getItem('user');
+export const registerUser = (userData) => {
+  const users = JSON.parse(localStorage.getItem('kanban-users')) || [];
+  users.push(userData);
+  localStorage.setItem('kanban-users', JSON.stringify(users));
 };
 
-export const getUser = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : null;
-};
-
-export const loginUser = (userData) => {
-  localStorage.setItem('user', JSON.stringify(userData));
+export const loginUser = (user) => {
+  localStorage.setItem('kanban-current-user', JSON.stringify(user));
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem('user');
+  localStorage.removeItem('kanban-current-user');
 };
 
-export const isUserRegistered = (email) => {
-  const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-  return users.some(user => user.email === email);
+export const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem('kanban-current-user'));
 };
 
-export const registerUser = (userData) => {
-  const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-  users.push(userData);
-  localStorage.setItem('registeredUsers', JSON.stringify(users));
+export const isAuthenticated = () => {
+  return !!getCurrentUser();
+};
+
+export const getRegisteredUsers = () => {
+  return JSON.parse(localStorage.getItem('kanban-users')) || [];
 };
