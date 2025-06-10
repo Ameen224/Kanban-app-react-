@@ -12,8 +12,8 @@ const KanbanPage = () => {
   return (
     <div className="kanban-page">
       <Header />
-      <AddForm onTaskAdd={triggerRefresh} />
       <Board key={refresh} />
+      <AddForm onTaskAdd={triggerRefresh} />
     </div>
   );
 };
