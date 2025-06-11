@@ -1,3 +1,5 @@
+//src/component/header
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser,getCurrentUser } from '../utils/auth';

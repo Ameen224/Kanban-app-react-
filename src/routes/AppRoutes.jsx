@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Login from '../Pages/Login';
-import Signup from '../Pages/Signup';
-import Dashboard from '../Pages/Kanbanpage';
-import TaskDetails from '../Pages/TaskDetail';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
+import Dashboard from '../pages/KanbanPage';
+import TaskDetails from '../pages/TaskDetail';
 import AuthLayout from '../components/AuthLayout';
 import GuestLayout from '../components/GuestLayout';
 
